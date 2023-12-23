@@ -8,6 +8,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { SISGEANestSSOAuthenticationModule } from '@sisgea/sso-nest-client';
 import { AuthenticatedGraphQLGuard } from '@sisgea/sso-nest-client/dist/application/gql';
+import { GqlExceptionFilter } from '../infrastructure/api-app/filters/GqlExceptionFilter';
 import { DatabaseModule } from '../infrastructure/database/database.module';
 import { DBEventsModule } from '../infrastructure/db-events/db-events.module';
 import { EnvironmentConfigModule } from '../infrastructure/environment-config';
@@ -17,7 +18,7 @@ import { SISGEAAutorizacaoConnectContainerModule } from '../infrastructure/sisge
 import { SISGEANestSSOContextModule } from '../infrastructure/sisgea-nest-sso-context';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { GqlExceptionFilter } from './filters/GqlExceptionFilter';
+import { GqlExceptionFilter } from '../infrastructure/api-app/filters/GqlExceptionFilter';
 
 @Module({
   imports: [
