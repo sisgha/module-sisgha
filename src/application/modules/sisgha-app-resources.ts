@@ -1,7 +1,9 @@
 import { IAppResource } from '../../domain';
+import { SisghaAppResourceModalidade } from './sisgha-app-resource-modalidade';
 
 export const APP_RESOURCES: IAppResource[] = [
   //
+  SisghaAppResourceModalidade,
 ];
 
 export const getAppResourceByKey = (key: string) => {

@@ -18,7 +18,7 @@ import { SISGEAAutorizacaoConnectContainerModule } from '../infrastructure/sisge
 import { SISGEANestSSOContextModule } from '../infrastructure/sisgea-nest-sso-context';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { GqlExceptionFilter } from '../infrastructure/api-app/filters/GqlExceptionFilter';
+import { SisghaModalidadeModule } from './modules/sisgha-modalidade/sisgha-modalidade.module';
 
 @Module({
   imports: [
@@ -82,6 +82,7 @@ import { GqlExceptionFilter } from '../infrastructure/api-app/filters/GqlExcepti
 
     //
 
+    SisghaModalidadeModule,
   ],
 
   controllers: [
