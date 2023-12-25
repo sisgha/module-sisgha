@@ -43,6 +43,7 @@
     "@nestjs/throttler": "^5.0.0",
     "@sisgea/autorizacao-client": "github:sisgha/sisgea-autorizacao-client",
     "@sisgea/sso-nest-client": "github:sisgha/sisgea-sso-nest-client",
+    "@sisgea/spec": "github:sisgha/sisgea-spec",
     "amqplib": "^0.10.3",
     "compression": "^1.7.4",
     "graphql": "^16.8.1",

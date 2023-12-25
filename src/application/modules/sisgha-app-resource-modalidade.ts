@@ -1,7 +1,8 @@
-import { IAppResource, IAppResourceKey } from '../../domain';
+import { SisgeaResource } from '@sisgea/spec';
+import { IAppResource } from '../../domain';
 
 export const SisghaAppResourceModalidade: IAppResource = {
-  key: IAppResourceKey.MODALIDADE,
+  key: SisgeaResource.MODALIDADE,
 
   tableName: 'modalidade',
 };

@@ -1,6 +1,5 @@
 import { Directive, Field, ID, ObjectType } from '@nestjs/graphql';
-import { SisghaCursoModel } from '../../../../../../domain';
-import { SisghaModalidadeModel } from '../../../../../../domain/models/sisgha-modalidade.model';
+import { SisghaModalidadeModel } from '@sisgea/spec';
 
 @ObjectType('Modalidade')
 @Directive('@key(fields: "id")')

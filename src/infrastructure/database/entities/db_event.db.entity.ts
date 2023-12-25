@@ -1,9 +1,9 @@
+import { SisgeaDbEventModel } from '@sisgea/spec';
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
-import { DBEvent } from '../../../domain';
 import { getAppResourceTableName } from '../../../application/modules/sisgha-app-resources';
 
 @Entity('db_event')
-export class DBEventDbEntity<D = unknown> implements DBEvent<D> {
+export class DBEventDbEntity<D = unknown> implements SisgeaDbEventModel<D> {
   @PrimaryColumn({ name: 'id', type: 'uuid' })
   id!: string;
 

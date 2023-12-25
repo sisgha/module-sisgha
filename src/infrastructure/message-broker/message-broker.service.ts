@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { SisgeaDbEventModel } from '@sisgea/spec';
 import { getAppResourceKeyByTableName } from '../../application/modules/sisgha-app-resources';
-import { DBEvent } from '../../domain';
 import { MessageBrokerContainerService } from './message-broker-container.service';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class MessageBrokerService {
     private messageBrokerContainerService: MessageBrokerContainerService,
   ) {}
 
-  async publishDbEvent(dbEvent: DBEvent) {
+  async publishDbEvent(dbEvent: SisgeaDbEventModel) {
     try {
       const broker = await this.messageBrokerContainerService.getBroker();
 

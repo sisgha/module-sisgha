@@ -1,5 +1,5 @@
 import { Field, ID, InputType } from '@nestjs/graphql';
-import { IModalidadeDeleteInput } from '../../../../../../domain';
+import { IModalidadeDeleteInput } from '@sisgea/spec';
 
 @InputType('ModalidadeDeleteInput')
 export class ModalidadeDeleteInputType implements IModalidadeDeleteInput {

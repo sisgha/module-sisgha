@@ -1,6 +1,6 @@
+import { SisghaModalidadeModel } from '@sisgea/spec';
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { CursoDbEntity } from './curso.db.entity';
-import { SisghaModalidadeModel } from '../../../domain/models/sisgha-modalidade.model';
 
 @Entity('modalidade')
 export class ModalidadeDbEntity implements SisghaModalidadeModel {

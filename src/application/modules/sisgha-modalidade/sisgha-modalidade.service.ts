@@ -1,21 +1,20 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { get, has, omit } from 'lodash';
-import { FindOneOptions } from 'typeorm';
 import {
-  IAppResourceKey,
   IModalidadeCheckSlugAvailabilityInput,
   IModalidadeCreateInput,
   IModalidadeDeleteInput,
   IModalidadeFindByIdInput,
   IModalidadeUpdateInput,
-} from '../../../domain';
-import { SisghaModalidadeModel } from '../../../domain/models/sisgha-modalidade.model';
-import { ActorContext } from '../../../infrastructure/iam/actor-context';
-import { ModalidadeDbEntity } from '../../../infrastructure/database/entities/modalidade.db.entity';
+  SisgeaResource,
+  SisghaModalidadeModel,
+  ValidationErrorCodeModalidade,
+} from '@sisgea/spec';
+import { get, has, omit } from 'lodash';
+import { FindOneOptions } from 'typeorm';
 import { ValidationFailedException } from '../../../infrastructure/api-app/validation';
-
-import { ValidationErrorCodeModalidade } from '../../../domain/dtos/modalidade/ValidationErrorCodeModalidade';
+import { ModalidadeDbEntity } from '../../../infrastructure/database/entities/modalidade.db.entity';
 import { IGenericAction } from '../../../infrastructure/iam/IGenericAction';
+import { ActorContext } from '../../../infrastructure/iam/actor-context';
 
 @Injectable()
 export class SisghaModalidadeService {
@@ -49,7 +48,7 @@ export class SisghaModalidadeService {
       });
     });
 
-    return actorContext.readResource(IAppResourceKey.MODALIDADE, modalidade);
+    return actorContext.readResource(SisgeaResource.MODALIDADE, modalidade);
   }
 
   async modalidadeFindByIdStrict(
@@ -155,7 +154,7 @@ export class SisghaModalidadeService {
       ...fieldsData,
     };
 
-    await actorContext.ensurePermission(IAppResourceKey.MODALIDADE, IGenericAction.CREATE, modalidade);
+    await actorContext.ensurePermission(SisgeaResource.MODALIDADE, IGenericAction.CREATE, modalidade);
 
     const dbModalidade = await actorContext.db_run(async ({ modalidadeRepository }) => {
       await modalidadeRepository.save(modalidade);
@@ -194,7 +193,7 @@ export class SisghaModalidadeService {
       ...fieldsData,
     };
 
-    await actorContext.ensurePermission(IAppResourceKey.MODALIDADE, IGenericAction.UPDATE, updatedModalidade);
+    await actorContext.ensurePermission(SisgeaResource.MODALIDADE, IGenericAction.UPDATE, updatedModalidade);
 
     await actorContext.db_run(async ({ modalidadeRepository }) => {
       await modalidadeRepository.save(updatedModalidade);
@@ -207,7 +206,7 @@ export class SisghaModalidadeService {
   async modalidadeDelete(actorContext: ActorContext, dto: IModalidadeDeleteInput) {
     const modalidade = await this.modalidadeFindByIdStrictSimple(actorContext, dto.id);
 
-    await actorContext.ensurePermission(IAppResourceKey.MODALIDADE, IGenericAction.DELETE, modalidade);
+    await actorContext.ensurePermission(SisgeaResource.MODALIDADE, IGenericAction.DELETE, modalidade);
 
     await actorContext.db_run(async ({ modalidadeRepository }) => {
       await modalidadeRepository

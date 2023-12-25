@@ -4,10 +4,10 @@ import { IRequestUser } from '@sisgea/sso-nest-client';
 import { get } from 'lodash';
 import { DataSource } from 'typeorm';
 import { IAuthenticatedEntityType } from '../../../domain/iam/authentication';
-import { Actor, ActorUser } from '../authentication';
 import { DatabaseContext } from '../../datbase-context/database-context';
 import { SISGEAAutorizacaoConnectContainerService } from '../../sisgea-autorizacao-connect-container/sisgea-autorizacao-connect-container.service';
 import { IGenericAction } from '../IGenericAction';
+import { Actor, ActorUser } from '../authentication';
 
 export class ActorContext {
   constructor(
@@ -97,6 +97,7 @@ export class ActorContext {
 
   async readResource(resource: string, data: any) {
     await this.ensurePermission(resource, IGenericAction.READ, data);
+
     return data;
   }
 
