@@ -1,9 +1,9 @@
 import { Injectable, PipeTransform } from '@nestjs/common';
-import { IRequestUser } from '@sisgea/sso-nest-client';
-import { RequestUserSSOGql } from '@sisgea/sso-nest-client/dist/application/gql';
-import { ActorContext } from '../../actor-context';
+import { IRequestUser } from '@sisgea/nest-auth-connect';
+import { SisgeaRequestUserGql } from '@sisgea/nest-auth-connect/dist/modules/sisgea-nest-auth-protect/gql';
 import { DatabaseService } from '../../../database/database.service';
 import { SISGEAAutorizacaoConnectContainerService } from '../../../sisgea-autorizacao-connect-container/sisgea-autorizacao-connect-container.service';
+import { ActorContext } from '../../actor-context';
 
 @Injectable()
 export class ResolveActorContextPipe implements PipeTransform {
@@ -19,4 +19,4 @@ export class ResolveActorContextPipe implements PipeTransform {
   }
 }
 
-export const ResolveActorContext = (options?: any) => RequestUserSSOGql(options, ResolveActorContextPipe);
+export const ResolveActorContext = (options?: any) => SisgeaRequestUserGql(options, ResolveActorContextPipe);

@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ISISGEANestSSOConfigKeyCloakCredentials, ISISGEANestSSOConfigOIDCClientCredentials } from '@sisgea/sso-nest-client';
+import {
+  ISisgeaNestAuthConnectConfigKeycloakCredentials,
+  ISisgeaNestAuthConnectConfigOidcClientCredentials,
+} from '@sisgea/nest-auth-connect';
 import { join } from 'path';
 import { DataSourceOptions } from 'typeorm';
 import { IConfig } from '../../domain';
@@ -9,16 +12,16 @@ import { IConfig } from '../../domain';
 export class EnvironmentConfigService implements IConfig {
   constructor(
     // ...
-    private configService: ConfigService,
+    private nestConfigService: ConfigService,
   ) {}
 
   getSISGEAAutorizacaoGRPCServer(): string | null {
-    const url = this.configService.get<string | string>('SISGEA_AUTORIZACAO_GRPC_SERVER') ?? null;
+    const url = this.nestConfigService.get<string | string>('SISGEA_AUTORIZACAO_GRPC_SERVER') ?? null;
     return url;
   }
 
   getRuntimePort(): number {
-    const configPort = this.configService.get<number | string>('PORT') ?? null;
+    const configPort = this.nestConfigService.get<number | string>('PORT') ?? null;
 
     if (configPort !== null) {
       const configPortAsNumber = parseInt(String(configPort));
@@ -32,7 +35,7 @@ export class EnvironmentConfigService implements IConfig {
   }
 
   getRuntimeNodeEnv(): string {
-    const runtimeNodeEnv = (this.configService.get<string>('NODE_ENV') ?? 'production').trim().toLocaleLowerCase();
+    const runtimeNodeEnv = (this.nestConfigService.get<string>('NODE_ENV') ?? 'production').trim().toLocaleLowerCase();
 
     return runtimeNodeEnv;
   }
@@ -68,43 +71,43 @@ export class EnvironmentConfigService implements IConfig {
   // ...
 
   getDBDatabase(): string | undefined {
-    return this.configService.get<string>('DB_DATABASE');
+    return this.nestConfigService.get<string>('DB_DATABASE');
   }
 
   getDBHost(): string | undefined {
-    return this.configService.get<string>('DB_HOST');
+    return this.nestConfigService.get<string>('DB_HOST');
   }
 
   getDBPassword(): string | undefined {
-    return this.configService.get<string>('DB_PASSWORD');
+    return this.nestConfigService.get<string>('DB_PASSWORD');
   }
 
   getDBPort(): string | undefined {
-    return this.configService.get<string>('DB_PORT');
+    return this.nestConfigService.get<string>('DB_PORT');
   }
 
   getDBSchema(): string | undefined {
-    return this.configService.get<string>('DB_SCHEMA');
+    return this.nestConfigService.get<string>('DB_SCHEMA');
   }
 
   getDBUsername(): string | undefined {
-    return this.configService.get<string>('DB_USERNAME');
+    return this.nestConfigService.get<string>('DB_USERNAME');
   }
 
   getDBConnection(): string | undefined {
-    return this.configService.get<string>('DB_CONNECTION');
+    return this.nestConfigService.get<string>('DB_CONNECTION');
   }
 
   getDBUrl(): string | undefined {
-    return this.configService.get<string>('DATABASE_URL');
+    return this.nestConfigService.get<string>('DATABASE_URL');
   }
 
   getDBUseSSL(): string | undefined {
-    return this.configService.get<string>('DATABASE_USE_SSL');
+    return this.nestConfigService.get<string>('DATABASE_USE_SSL');
   }
 
   getTypeORMLogging(): string | undefined {
-    return this.configService.get<string>('TYPEORM_LOGGING');
+    return this.nestConfigService.get<string>('TYPEORM_LOGGING');
   }
 
   getTypeORMSharedDataSourceOptions(): Partial<DataSourceOptions> {
@@ -201,22 +204,10 @@ export class EnvironmentConfigService implements IConfig {
 
   //
 
-  getOIDCClientClientId(): string | undefined {
-    return this.configService.get<string>('OAUTH2_CLIENT_REGISTRATION_LOGIN_CLIENT_ID');
-  }
-
-  getOIDCClientClientSecret(): string | undefined {
-    return this.configService.get<string>('OAUTH2_CLIENT_REGISTRATION_LOGIN_CLIENT_SECRET');
-  }
-
-  getOIDCClientIssuer(): string | undefined {
-    return this.configService.get<string>('OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER');
-  }
-
-  getOIDCClientCredentials(): ISISGEANestSSOConfigOIDCClientCredentials {
-    const issuer = this.getOIDCClientIssuer();
-    const clientId = this.getOIDCClientClientId();
-    const clientSecret = this.getOIDCClientClientSecret();
+  getOidcClientCredentials(): ISisgeaNestAuthConnectConfigOidcClientCredentials {
+    const issuer = this.nestConfigService.get<string>('OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER');
+    const clientId = this.nestConfigService.get<string>('OAUTH2_CLIENT_REGISTRATION_LOGIN_CLIENT_ID');
+    const clientSecret = this.nestConfigService.get<string>('OAUTH2_CLIENT_REGISTRATION_LOGIN_CLIENT_SECRET');
 
     if (issuer === undefined || clientId === undefined || clientSecret === undefined) {
       throw new Error('Please provide correct OAUTH2_CLIENT credentials.');
@@ -231,14 +222,14 @@ export class EnvironmentConfigService implements IConfig {
 
   //
 
-  getKeyCloakConfigCredentials(): ISISGEANestSSOConfigKeyCloakCredentials {
-    throw new Error('getKeyCloakConfigCredentials: not implemented.');
+  getKeycloakConfigCredentials(): ISisgeaNestAuthConnectConfigKeycloakCredentials {
+    throw new Error('getKeycloakConfigCredentials: not implemented.');
   }
 
   //
 
   getMessageBrokerConnectionURL(): string | undefined {
-    return this.configService.get<string>('MESSAGE_BROKER_CONNECTION_URL');
+    return this.nestConfigService.get<string>('MESSAGE_BROKER_CONNECTION_URL');
   }
 
   //

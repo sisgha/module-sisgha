@@ -6,8 +6,8 @@ import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ThrottlerModule } from '@nestjs/throttler';
-import { SISGEANestSSOAuthenticationModule } from '@sisgea/sso-nest-client';
-import { AuthenticatedGraphQLGuard } from '@sisgea/sso-nest-client/dist/application/gql';
+import { SisgeaNestAuthConnectModule } from '@sisgea/nest-auth-connect';
+import { AuthenticatedGqlGuard } from '@sisgea/nest-auth-connect/dist/modules/sisgea-nest-auth-protect/gql';
 import { GqlExceptionFilter } from '../infrastructure/api-app/filters/GqlExceptionFilter';
 import { DatabaseModule } from '../infrastructure/database/database.module';
 import { DBEventsModule } from '../infrastructure/db-events/db-events.module';
@@ -15,9 +15,10 @@ import { EnvironmentConfigModule } from '../infrastructure/environment-config';
 import { ActorContextModule } from '../infrastructure/iam/actor-context';
 import { MessageBrokerModule } from '../infrastructure/message-broker/message-broker.module';
 import { SISGEAAutorizacaoConnectContainerModule } from '../infrastructure/sisgea-autorizacao-connect-container/sisgea-autorizacao-connect-container.module';
-import { SISGEANestSSOContextModule } from '../infrastructure/sisgea-nest-sso-context';
+import { SisgeaNestAuthConnectConfigModule } from '../infrastructure/sisgea-nest-auth-connect-config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { SisghaCursoModule } from './modules/sisgha-curso/sisgha-curso.module';
 import { SisghaModalidadeModule } from './modules/sisgha-modalidade/sisgha-modalidade.module';
 
 @Module({
@@ -58,11 +59,8 @@ import { SisghaModalidadeModule } from './modules/sisgha-modalidade/sisgha-modal
 
     //
 
-    SISGEANestSSOContextModule,
-
-    //
-
-    SISGEANestSSOAuthenticationModule,
+    SisgeaNestAuthConnectConfigModule,
+    SisgeaNestAuthConnectModule,
 
     //
 
@@ -83,6 +81,7 @@ import { SisghaModalidadeModule } from './modules/sisgha-modalidade/sisgha-modal
     //
 
     SisghaModalidadeModule,
+    SisghaCursoModule,
   ],
 
   controllers: [
@@ -93,7 +92,7 @@ import { SisghaModalidadeModule } from './modules/sisgha-modalidade/sisgha-modal
     //
     {
       provide: APP_GUARD,
-      useClass: AuthenticatedGraphQLGuard,
+      useClass: AuthenticatedGqlGuard,
     },
 
     {

@@ -1,6 +1,6 @@
 import { ForbiddenException, InternalServerErrorException } from '@nestjs/common';
 import { GenericCanRequest } from '@sisgea/autorizacao-client';
-import { IRequestUser } from '@sisgea/sso-nest-client';
+import { IRequestUser } from '@sisgea/nest-auth-connect';
 import { get } from 'lodash';
 import { DataSource } from 'typeorm';
 import { IAuthenticatedEntityType } from '../../../domain/iam/authentication';

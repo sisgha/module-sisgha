@@ -1,6 +1,6 @@
 import { Global, Module } from '@nestjs/common';
 import { EnvironmentConfigModule } from '../environment-config';
-import { sisgeaNestSSOContextProvider } from './providers/sisgea-nest-sso-context.provider';
+import { SisgeaNestAuthConnectConfigProvider } from './providers/sisgea-nest-auth-connect-config.provider';
 
 @Global()
 @Module({
@@ -10,11 +10,11 @@ import { sisgeaNestSSOContextProvider } from './providers/sisgea-nest-sso-contex
   ],
   providers: [
     // ...
-    sisgeaNestSSOContextProvider,
+    SisgeaNestAuthConnectConfigProvider,
   ],
   exports: [
     // ...
-    sisgeaNestSSOContextProvider,
+    SisgeaNestAuthConnectConfigProvider,
   ],
 })
-export class SISGEANestSSOContextModule {}
+export class SisgeaNestAuthConnectConfigModule {}

@@ -1,5 +1,5 @@
 import { Field, ID, InputType } from '@nestjs/graphql';
-import { IModalidadeUpdateInput } from '../../../../../../domain';
+import { IModalidadeUpdateInput } from '@sisgea/spec';
 
 @InputType('ModalidadeUpdateInput')
 export class ModalidadeUpdateInputType implements IModalidadeUpdateInput {

@@ -1,5 +1,6 @@
 import { Directive, Field, ID, ObjectType } from '@nestjs/graphql';
 import { SisghaModalidadeModel } from '@sisgea/spec';
+import { SisghaCursoType } from '../../../../sisgha-curso/adapters/graphql/types';
 
 @ObjectType('Modalidade')
 @Directive('@key(fields: "id")')
@@ -28,5 +29,6 @@ export class SisghaModalidadeType implements SisghaModalidadeModel {
 
   //
 
-  cursos!: SisghaCursoModel[];
+  // @Field(() => [SisghaCursoType], { nullable: false })
+  cursos!: SisghaCursoType[];
 }

@@ -1,4 +1,4 @@
-import { ISISGEANestSSOConfig } from '@sisgea/sso-nest-client';
+import { ISisgeaNestAuthConnectConfig } from '@sisgea/nest-auth-connect';
 import { IConfigDatabase } from './IConfigDatabase';
 import { IConfigMessageBroker } from './IConfigMessageBroker';
 import { IConfigRuntime } from './IConfigRuntime';
@@ -11,6 +11,6 @@ export interface IConfig
     IConfigDatabase,
     IConfigTypeORM,
     IConfigTypeORMDataSources,
-    ISISGEANestSSOConfig,
+    ISisgeaNestAuthConnectConfig,
     IConfigMessageBroker,
     IConfigSISGEAAutorizacao {}
